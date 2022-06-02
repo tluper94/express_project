@@ -13,12 +13,16 @@ async function onSubmit(e) {
     password: passwordInput.value,
   };
 
-  const formData = new FormData();
-  formData.append('json', JSON.stringify(signupData));
   const res = await fetch('/signup', {
     method: 'POST',
-    body: formData,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(signupData),
   });
 
-  console.log();
+  const data = await res.json();
+
+  console.log(data);
 }
