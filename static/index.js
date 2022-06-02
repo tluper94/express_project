@@ -7,10 +7,19 @@ form.addEventListener('submit', onSubmit);
 
 async function onSubmit(e) {
   e.preventDefault();
+
+  const name = nameInput.value;
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  if (!name.length > 0 || !email.length > 0 || password.length < 7) {
+    return;
+  }
+
   const signupData = {
-    name: nameInput.value,
-    email: emailInput.value,
-    password: passwordInput.value,
+    name: name,
+    email: email,
+    password: password,
   };
 
   const res = await fetch('/signup', {

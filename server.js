@@ -1,8 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-const port = '8000';
+const signup = require('./controllers/signup.controller');
+
+const port = process.env.PORT || 8000;
+
+const users = [];
 
 app.use(express.static('static'));
 app.use(express.json());
@@ -11,10 +16,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/static/index.html');
 });
 
-app.post('/signup', (req, res) => {
-  const { name, email, password } = req.body;
-  res.status(200).send(JSON.stringify({ name: name }));
-});
+app.post('/signup', signup);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
