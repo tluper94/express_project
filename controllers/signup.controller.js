@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const users = require('../models/users.model');
+const userModel = require('../models/users.model');
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -11,17 +11,28 @@ const signup = async (req, res) => {
     return;
   }
 
-  const validateUser = users.some((user) => user.email === email);
+  const isUser = await userModel.exists({ email: email });
 
-  if (!validateUser) {
-    const securePass = await bcrypt.hash(password, 10);
-    users.push({ name: name, email: email, password: securePass });
-    res.status(200).send(JSON.stringify({ name: name, emai: email }));
+  console.log(isUser);
+
+  if (!isUser) {
+    try {
+      const securePass = await bcrypt.hash(password, 10);
+      const user = new userModel({
+        name: name,
+        email: email,
+        password: securePass,
+      });
+      await user.save();
+      res
+        .status(200)
+        .send(JSON.stringify({ name: user.name, emai: user.email }));
+    } catch (err) {
+      res.status(500).send(JSON.stringify({ message: err }));
+    }
   } else {
     res.status(400).send(JSON.stringify({ message: 'User already exist' }));
   }
-
-  console.log(users);
 };
 
 module.exports = signup;

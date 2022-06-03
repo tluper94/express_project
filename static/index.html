@@ -8,14 +8,22 @@
   <title>Express Server</title>
 </head>
 <body>
-  <h2>Hello World</h2>
-  <form id="signup" action="/signup" method="post" class="form signup">
-    <h2 class="form-title">Create An Account</h2>
-    <input type="text" id="name" name="name" placeholder="Name"/>
-    <input type="email" id="email" name="email" placeholder="Email" />
-    <input type="password" id="password" name="password" placeholder="password" />
-    <button type="submit">Submit</button>
-  </form>
+  <h2 style="text-align: center;">Hello World</h2>
+  <div class="auth">
+    <form id="signup" action="/signup" method="post" class="form signup">
+      <h2 class="form-title">Create An Account</h2>
+      <input required type="text" id="signup_name" name="name" placeholder="Name"/>
+      <input required type="email" id="signup_email" name="email" placeholder="Email" />
+      <input required type="password" id="signup_password" name="password" placeholder="password" />
+      <button type="submit">Submit</button>
+    </form>
+    <form id="login" action="/login" method="post" class="form login">
+      <h2 class="form-title">Have An Account?</h2>
+      <input required type="email" id="login_email" name="email" placeholder="Email" />
+      <input required type="password" id="login_password" name="password" placeholder="password" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </body>
 <script src="index.js"></script>
 </html>

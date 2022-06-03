@@ -1,11 +1,42 @@
-const form = document.getElementById('signup');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
+const signupForm = document.getElementById('signup');
+const loginForm = document.getElementById('login');
 
-form.addEventListener('submit', onSubmit);
+const nameInput = document.getElementById('signup_name');
+const emailInput = document.getElementById('signup_email');
+const passwordInput = document.getElementById('signup_password');
 
-async function onSubmit(e) {
+const loginEmailInput = document.getElementById('login_email');
+const loginPasswordInput = document.getElementById('login_password');
+
+signupForm.addEventListener('submit', onSignupSubmit);
+loginForm.addEventListener('submit', onLoginSubmit);
+
+async function onLoginSubmit(e) {
+  e.preventDefault();
+
+  const email = loginEmailInput.value;
+  const password = loginPasswordInput.value;
+
+  const loginData = {
+    email,
+    password,
+  };
+
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(loginData),
+  });
+
+  const data = await res.json();
+
+  console.log(data);
+}
+
+async function onSignupSubmit(e) {
   e.preventDefault();
 
   const name = nameInput.value;
