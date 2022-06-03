@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const { json } = require('express/lib/response');
 const userModel = require('../models/users.model');
 
 const login = async (req, res) => {

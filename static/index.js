@@ -21,19 +21,26 @@ async function onLoginSubmit(e) {
     email,
     password,
   };
+  try {
+    const res = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    });
 
-  const res = await fetch('/login', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(loginData),
-  });
-
-  const data = await res.json();
-
-  console.log(data);
+    if (res.status === 200) {
+      const data = await res.json();
+      console.log(data);
+    } else {
+      const error = await res.json();
+      throw new Error(error.message);
+    }
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 async function onSignupSubmit(e) {
