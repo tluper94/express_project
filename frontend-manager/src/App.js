@@ -5,23 +5,33 @@ import AuthForm from './components/authForm/AuthForm';
 import { Input } from './components/authForm/AuthForm.styles';
 
 function App() {
-  const [createName, setCreateName] = useState('');
-  const [createEmail, setCreateEmail] = useState('');
-  const [createPassword, setCreatePassword] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function onNameChange(e) {
-    setCreateName(e.target.value);
+    setName(e.target.value);
   }
   function onEmailChange(e) {
-    setCreateEmail(e.target.value);
+    setEmail(e.target.value);
   }
   function onPasswordChange(e) {
-    setCreatePassword(e.target.value);
+    setPassword(e.target.value);
+  }
+
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+
+  function onLoginEmailChange(e) {
+    setLoginEmail(e.target.value);
+  }
+  function onLoginPasswordChange(e) {
+    setLoginPassword(e.target.value);
   }
 
   async function onSignupSubmit(e) {
     e.preventDefault();
-    if (createPassword.length < 7) {
+    if (password.length < 7) {
       return;
     }
     const res = await fetch('http://localhost:8000/signup', {
@@ -31,9 +41,9 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: createName,
-        email: createEmail,
-        password: createPassword,
+        name: name,
+        email: email,
+        password: password,
       }),
     });
     const data = await res.json();
@@ -41,36 +51,81 @@ function App() {
     console.log(data);
   }
 
-  console.log(createName, createEmail, createPassword);
+  async function onLoginSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+      });
+
+      if (res.status !== 200) {
+        const err = await res.json();
+        throw new Error(err.message);
+      } else {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className='App'>
-      <AuthForm title='Create An Account' onSubmit={onSignupSubmit}>
-        <Input
-          required
-          type='text'
-          name='createName'
-          placeholder='Name'
-          value={createName}
-          onChange={onNameChange}
-        />
-        <Input
-          required
-          type='email'
-          name='createEmail'
-          placeholder='Email'
-          value={createEmail}
-          onChange={onEmailChange}
-        />
-        <Input
-          required
-          type='password'
-          name='createPassword'
-          placeholder='password'
-          value={createPassword}
-          onChange={onPasswordChange}
-        />
-      </AuthForm>
+      <div className='auth'>
+        <AuthForm title='Create An Account' onSubmit={onSignupSubmit}>
+          <Input
+            required
+            type='text'
+            name='createName'
+            placeholder='Name'
+            value={name}
+            onChange={onNameChange}
+          />
+          <Input
+            required
+            type='email'
+            name='createEmail'
+            placeholder='Email'
+            value={email}
+            onChange={onEmailChange}
+          />
+          <Input
+            required
+            type='password'
+            name='createPassword'
+            placeholder='password'
+            value={password}
+            onChange={onPasswordChange}
+          />
+        </AuthForm>
+        <div className='login'>
+          <AuthForm title='Have An Account?' onSubmit={onLoginSubmit}>
+            <Input
+              required
+              type='email'
+              name='Email'
+              placeholder='Email'
+              value={loginEmail}
+              onChange={onLoginEmailChange}
+            />
+            <Input
+              required
+              type='password'
+              name='createPassword'
+              placeholder='password'
+              value={loginPassword}
+              onChange={onLoginPasswordChange}
+            />
+          </AuthForm>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,1 +1,19 @@
+.auth {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
 
+.login {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .login {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
