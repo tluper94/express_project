@@ -13,8 +13,6 @@ const signup = async (req, res) => {
 
   const isUser = await userModel.exists({ email: email });
 
-  console.log(isUser);
-
   if (!isUser) {
     try {
       const securePass = await bcrypt.hash(password, 10);

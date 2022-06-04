@@ -19,5 +19,5 @@ app.post('/signup', signup);
 app.post('/login', login);
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server listening on port ${port} - http://localhost:${port}`);
 });
