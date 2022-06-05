@@ -12,7 +12,7 @@ export const Form = styled.form`
   box-shadow: 2px 2px 1px 1px rgb(234, 234, 234);
 
   @media (max-width: 768px) {
-    width: 95vw;
+    width: 95%;
   }
 `;
 

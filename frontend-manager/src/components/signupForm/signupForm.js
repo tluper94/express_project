@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AuthForm from '../authForm/AuthForm';
 import { Input } from '../authForm/AuthForm.styles';
 
-function SignupForm() {
+function SignupForm({ setUser }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,21 +22,32 @@ function SignupForm() {
     if (password.length < 7) {
       return;
     }
-    const res = await fetch('http://localhost:8000/signup', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-    });
-    const data = await res.json();
 
-    console.log(data);
+    try {
+      const res = await fetch('http://localhost:8000/signup', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+        setUser(data);
+      } else {
+        const err = await res.json();
+        throw new Error(err.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

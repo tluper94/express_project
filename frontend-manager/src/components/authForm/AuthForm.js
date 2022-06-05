@@ -1,9 +1,9 @@
 import React from 'react';
 import { Form, Title, Submit } from './AuthForm.styles';
 
-function AuthForm({ title, children, onSubmit }) {
+function AuthForm({ style, title, children, onSubmit }) {
   return (
-    <Form onSubmit={onSubmit}>
+    <Form style={style} onSubmit={onSubmit}>
       <Title>{title}</Title>
       {children}
       <Submit>Submit</Submit>

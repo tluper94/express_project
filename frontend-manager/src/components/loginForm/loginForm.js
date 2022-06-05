@@ -3,7 +3,7 @@ import AuthForm from '../authForm/AuthForm';
 import { Input } from '../authForm/AuthForm.styles';
 import { Login } from './loginForm.styles';
 
-function LoginForm() {
+function LoginForm({ setUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,6 +33,7 @@ function LoginForm() {
       } else {
         const data = await res.json();
         console.log(data);
+        setUser(data);
       }
     } catch (err) {
       console.log(err);
@@ -40,26 +41,28 @@ function LoginForm() {
   }
   return (
     <>
-      <Login>
-        <AuthForm title='Have An Account?' onSubmit={onSubmit}>
-          <Input
-            required
-            type='email'
-            name='Email'
-            placeholder='Email'
-            value={email}
-            onChange={onEmailChange}
-          />
-          <Input
-            required
-            type='password'
-            name='createPassword'
-            placeholder='password'
-            value={password}
-            onChange={onPasswordChange}
-          />
-        </AuthForm>
-      </Login>
+      <AuthForm
+        style={{ marginTop: '20px' }}
+        title='Have An Account?'
+        onSubmit={onSubmit}
+      >
+        <Input
+          required
+          type='email'
+          name='Email'
+          placeholder='Email'
+          value={email}
+          onChange={onEmailChange}
+        />
+        <Input
+          required
+          type='password'
+          name='createPassword'
+          placeholder='password'
+          value={password}
+          onChange={onPasswordChange}
+        />
+      </AuthForm>
     </>
   );
 }
