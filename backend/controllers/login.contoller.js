@@ -1,32 +1,29 @@
-const bcrypt = require('bcrypt');
 const userModel = require('../models/users.model');
+const JWT = require('jsonwebtoken');
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  if (!email || !password) {
+  if (!username || !password) {
     res.status(400).send(JSON.stringify({ message: 'Invalid fields' }));
     return;
   }
 
-  const isUser = await userModel.exists({ email: email });
+  userModel.findOne({ username: username }, (err, user) => {
+    if (err) {
+      res.status(400).send(JSON.stringify({ message: 'Error in AUTH Route' }));
+    } else {
+      const payload = {
+        id: user.id,
+        expire: Date.now + 1000 * 60 * 60 * 24 * 7,
+      };
+      const token = JWT.sign(JSON.stringify(payload), process.env.JWTSECRET);
 
-  if (!isUser) {
-    res.status(400).send(JSON.stringify({ message: 'User does not exist' }));
-    return;
-  }
-
-  const user = await userModel.findById(isUser);
-
-  const isValidPassword = await bcrypt.compare(password, user.password);
-
-  if (isValidPassword) {
-    res
-      .status(200)
-      .send(JSON.stringify({ name: user.name, email: user.email }));
-  } else {
-    res.status(400).send(JSON.stringify({ message: 'Invalid credentials' }));
-  }
+      res.json({
+        token: token,
+      });
+    }
+  });
 };
 
 module.exports = login;
