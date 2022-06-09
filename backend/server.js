@@ -18,7 +18,7 @@ app.use(cors());
 app.use(auth.initialize());
 app.use(
   session({
-    secret: 'keyboard cat',
+    secret: process.env.JWTSECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true },

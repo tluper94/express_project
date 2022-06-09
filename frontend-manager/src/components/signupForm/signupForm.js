@@ -1,14 +1,19 @@
+import axios from 'axios';
 import { useState } from 'react';
 import AuthForm from '../authForm/AuthForm';
 import { Input } from '../authForm/AuthForm.styles';
 
 function SignupForm({ setUser }) {
   const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function onNameChange(e) {
     setName(e.target.value);
+  }
+  function onUsernameChange(e) {
+    setUsername(e.target.value);
   }
   function onEmailChange(e) {
     setEmail(e.target.value);
@@ -24,29 +29,15 @@ function SignupForm({ setUser }) {
     }
 
     try {
-      const res = await fetch('http://localhost:8000/signup', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          password: password,
-        }),
+      const res = await axios.post('http://localhost:8000/signup', {
+        name,
+        username,
+        email,
+        password,
       });
-
-      if (res.status === 200) {
-        const data = await res.json();
-        console.log(data);
-        setUser(data);
-      } else {
-        const err = await res.json();
-        throw new Error(err.message);
-      }
+      setUser(res.data);
     } catch (err) {
-      console.log(err);
+      alert(err.response.data.message);
     }
   }
 
@@ -56,15 +47,23 @@ function SignupForm({ setUser }) {
         <Input
           required
           type='text'
-          name='createName'
+          name='name'
           placeholder='Name'
           value={name}
           onChange={onNameChange}
         />
         <Input
           required
+          type='text'
+          name='username'
+          placeholder='Username'
+          value={username}
+          onChange={onUsernameChange}
+        />
+        <Input
+          required
           type='email'
-          name='createEmail'
+          name='email'
           placeholder='Email'
           value={email}
           onChange={onEmailChange}
@@ -72,7 +71,7 @@ function SignupForm({ setUser }) {
         <Input
           required
           type='password'
-          name='createPassword'
+          name='password'
           placeholder='password'
           value={password}
           onChange={onPasswordChange}

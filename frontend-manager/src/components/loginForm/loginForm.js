@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import axios from 'axios';
 import AuthForm from '../authForm/AuthForm';
 import { Input } from '../authForm/AuthForm.styles';
-import { Login } from './loginForm.styles';
 
 function LoginForm({ setUser }) {
-  const [email, setEmail] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  function onEmailChange(e) {
-    setEmail(e.target.value);
+  function onUsernameChange(e) {
+    setUserName(e.target.value);
   }
   function onPasswordChange(e) {
     setPassword(e.target.value);
@@ -18,25 +18,13 @@ function LoginForm({ setUser }) {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:8000/login', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email, password: password }),
+      const res = await axios.post('http://localhost:8000/login', {
+        username: username,
+        password: password,
       });
-
-      if (res.status !== 200) {
-        const err = await res.json();
-        throw new Error(err.message);
-      } else {
-        const data = await res.json();
-        console.log(data);
-        setUser(data);
-      }
+      setUser(res.data);
     } catch (err) {
-      console.log(err);
+      alert('Invalid Creditials');
     }
   }
   return (
@@ -48,11 +36,11 @@ function LoginForm({ setUser }) {
       >
         <Input
           required
-          type='email'
-          name='Email'
-          placeholder='Email'
-          value={email}
-          onChange={onEmailChange}
+          type='username'
+          name='Username'
+          placeholder='Username'
+          value={username}
+          onChange={onUsernameChange}
         />
         <Input
           required
