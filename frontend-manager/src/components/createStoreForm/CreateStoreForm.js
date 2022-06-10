@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import AuthForm from '../authForm/AuthForm';
-import { Input } from '../authForm/AuthForm.styles';
+import {
+  FormContainer,
+  FormHeader,
+  FormInput,
+  FormInputContainer,
+  FormLabel,
+} from './CreateStoreForm.styles';
 
 function CreateStoreForm() {
   const [storeInfo, setStoreInfo] = useState({
@@ -26,24 +31,25 @@ function CreateStoreForm() {
 
   console.log(storeInfo);
   return (
-    <AuthForm>
-      <Input
-        onChange={onNameChange}
-        type='text'
-        placeholder='Store Name'
-        value={storeInfo.name}
-      ></Input>
-      <Input
-        onChange={onAddressChange}
-        type='text'
-        placeholder='Store Address'
-      ></Input>
-      <Input
-        onChange={onPhoneChange}
-        type='tel'
-        placeholder='Store Phone Number'
-      ></Input>
-    </AuthForm>
+    <FormContainer>
+      <FormHeader>Store Info</FormHeader>
+      <FormInputContainer>
+        <FormLabel>Name</FormLabel>
+        <FormInput
+          onChange={onNameChange}
+          type='text'
+          value={storeInfo.name}
+        ></FormInput>
+      </FormInputContainer>
+      <FormInputContainer>
+        <FormLabel>Address</FormLabel>
+        <FormInput onChange={onAddressChange} type='text'></FormInput>
+      </FormInputContainer>
+      <FormInputContainer>
+        <FormLabel>Phone Number</FormLabel>
+        <FormInput onChange={onPhoneChange} type='tel'></FormInput>
+      </FormInputContainer>
+    </FormContainer>
   );
 }
 
