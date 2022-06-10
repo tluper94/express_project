@@ -1,9 +1,13 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AuthForm from '../authForm/AuthForm';
 import { Input } from '../authForm/AuthForm.styles';
+import { LoginBtn } from './signupForm.styles';
 
-function SignupForm({ setUser }) {
+function SignupForm({ setUser, onLoginClick }) {
+  const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -35,15 +39,24 @@ function SignupForm({ setUser }) {
         email,
         password,
       });
+      console.log(res);
       setUser(res.data);
+      navigate('/');
     } catch (err) {
+      console.log(err);
       alert(err.response.data.message);
     }
   }
 
   return (
     <>
-      <AuthForm title='Create An Account' onSubmit={onSignupSubmit}>
+      <AuthForm
+        title='Create An Account'
+        onSubmit={onSignupSubmit}
+        changeText={
+          <LoginBtn onClick={onLoginClick}>Have An Account?</LoginBtn>
+        }
+      >
         <Input
           required
           type='text'

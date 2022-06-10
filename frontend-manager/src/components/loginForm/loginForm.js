@@ -2,8 +2,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import AuthForm from '../authForm/AuthForm';
 import { Input } from '../authForm/AuthForm.styles';
+import { CreateAccountBtn } from './loginForm.styles';
+import { useNavigate } from 'react-router-dom';
 
-function LoginForm({ setUser }) {
+function LoginForm({ setUser, onCreateAccountClick }) {
+  const navigate = useNavigate();
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,6 +26,7 @@ function LoginForm({ setUser }) {
         password: password,
       });
       setUser(res.data);
+      navigate('/');
     } catch (err) {
       alert('Invalid Creditials');
     }
@@ -33,6 +37,11 @@ function LoginForm({ setUser }) {
         style={{ marginTop: '20px' }}
         title='Have An Account?'
         onSubmit={onSubmit}
+        changeText={
+          <CreateAccountBtn onClick={onCreateAccountClick}>
+            Need An Account?
+          </CreateAccountBtn>
+        }
       >
         <Input
           required

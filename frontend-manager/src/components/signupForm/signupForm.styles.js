@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CreateAccountBtn = styled.p`
+export const LoginBtn = styled.p`
   cursor: pointer;
   color: blue;
 `;

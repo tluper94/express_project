@@ -1,4 +1,5 @@
 const User = require('../models/users.model');
+const JWT = require('jsonwebtoken');
 
 const signup = async (req, res) => {
   const { username, name, email, password } = req.body;
@@ -13,8 +14,17 @@ const signup = async (req, res) => {
   User.register(
     new User({ name: name, username: username, email: email }),
     password,
-    (err, msg) => {
-      err ? res.status(400).send(err) : res.send({ message: msg });
+    (err, user) => {
+      if (err) {
+        res.status(400).json({ message: 'User Already Exist' });
+      } else {
+        const payload = {
+          id: user.id,
+          expire: Date.now + 1000 * 60 * 60 * 24 * 7,
+        };
+        const token = JWT.sign(JSON.stringify(payload), process.env.JWTSECRET);
+        res.json({ token: token });
+      }
     }
   );
 };

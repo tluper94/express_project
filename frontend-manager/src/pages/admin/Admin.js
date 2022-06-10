@@ -1,10 +1,19 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { AdminContainer } from './Admin.styles';
+import { useNavigate, Link } from 'react-router-dom';
 
-function Admin() {
+function Admin({ user }) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth');
+    }
+  }, [user]);
   return (
-    <div style={{ height: '100%' }}>
+    <AdminContainer>
       <section>
-        <h2>STORE</h2>
+        <h2>Store</h2>
+        <Link to='/createstore'>Create Store</Link>
       </section>
       <section>
         <h2>Employees</h2>
@@ -12,7 +21,8 @@ function Admin() {
       <section>
         <h2>Finance</h2>
       </section>
-    </div>
+      <h2>Test</h2>
+    </AdminContainer>
   );
 }
 

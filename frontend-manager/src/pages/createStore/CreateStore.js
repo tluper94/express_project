@@ -1,7 +1,13 @@
 import React from 'react';
+import CreateStoreForm from '../../components/createStoreForm/CreateStoreForm';
+import { CreateStoreContainer } from './CreateStore.styles';
 
 function CreateStore() {
-  return <div>CreateStore</div>;
+  return (
+    <CreateStoreContainer>
+      <CreateStoreForm />
+    </CreateStoreContainer>
+  );
 }
 
 export default CreateStore;
