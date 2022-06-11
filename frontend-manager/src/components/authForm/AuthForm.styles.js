@@ -3,13 +3,11 @@ import styled from 'styled-components';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 40vw;
-  border: 2px solid grey;
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  padding-bottom: 40px;
-  box-shadow: 2px 2px 1px 1px rgb(234, 234, 234);
+  padding: 1.25rem;
+  box-shadow: 1px 1px 16px 5px rgb(235 235 235);
 
   @media (max-width: 768px) {
     width: 95%;
@@ -21,17 +19,32 @@ export const Title = styled.h2`
   text-align: center;
 `;
 
+export const FormInputContainer = styled.div`
+  display: flex;
+  margin-top: 1.25rem;
+  flex-direction: column;
+`;
+
 export const Input = styled.input`
   font-size: 20px;
   border-radius: 5px;
-  margin: 1vw 2vw;
-  width: 90%;
-  height: 50px;
+  border: 1px solid rgb(205 205 205);
+  height: 36px;
+  &:focus {
+    outline: 2px solid #458fff;
+  }
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.25rem;
+  flex-direction: column;
 `;
 
 export const Submit = styled.button`
   color: white;
-  font-size: 20px;
   width: 85%;
   height: 40px;
   background-color: rgb(0, 184, 104);

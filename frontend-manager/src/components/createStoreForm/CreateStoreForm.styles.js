@@ -8,8 +8,8 @@ export const FormContainer = styled.form`
   flex-direction: column;
   padding: 1.25em;
   background-color: rgb(255, 255, 255);
-  @media (max-width: 768px;) {
-    width: 100%;
+  @media (max-width: 768px) {
+    width: 95%;
   }
 `;
 

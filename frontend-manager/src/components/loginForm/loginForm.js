@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import AuthForm from '../authForm/AuthForm';
-import { Input } from '../authForm/AuthForm.styles';
+import { Input, FormInputContainer } from '../authForm/AuthForm.styles';
 import { CreateAccountBtn } from './loginForm.styles';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,7 +35,7 @@ function LoginForm({ setUser, onCreateAccountClick }) {
     <>
       <AuthForm
         style={{ marginTop: '20px' }}
-        title='Have An Account?'
+        title='Sign In'
         onSubmit={onSubmit}
         changeText={
           <CreateAccountBtn onClick={onCreateAccountClick}>
