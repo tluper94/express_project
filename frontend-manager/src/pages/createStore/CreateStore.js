@@ -17,6 +17,9 @@ function CreateStore() {
         <FormInputContainer>
           <FormInput />
         </FormInputContainer>
+        <FormInputContainer>
+          <FormInput />
+        </FormInputContainer>
       </Form>
     </CreateStoreContainer>
   );
