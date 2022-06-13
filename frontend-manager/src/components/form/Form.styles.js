@@ -15,11 +15,13 @@ export const FormContainer = styled.form`
 
 export const FormHeader = styled.h2`
   margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  font-size: ${(props) => props.fontSize || '2rem'};
+  font-weight: 400;
 `;
 
-export const FormInputContainer = styled.div`
+export const FormSection = styled.section`
   display: flex;
   margin-top: 1.25rem;
   flex-direction: column;
@@ -38,4 +40,21 @@ export const FormLabel = styled.label`
   width: 100%;
   margin-right: auto;
   margin-bottom: 5px;
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const Btn = styled.button`
+  color: white;
+  width: 85%;
+  height: 40px;
+  background-color: rgb(0, 184, 104);
+  border: 1px solid rgb(0, 184, 104);
+  border-radius: 10px;
+  cursor: pointer;
 `;

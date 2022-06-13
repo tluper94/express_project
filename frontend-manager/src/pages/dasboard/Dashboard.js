@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
-import { AdminContainer } from './Admin.styles';
+import { DashboardContainer } from './Dashboard.styles';
 import { useNavigate, Link } from 'react-router-dom';
 
-function Admin({ user }) {
+function Dashboard({ user }) {
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {
       navigate('/auth');
     }
-  }, [user]);
+  }, [user, navigate]);
   return (
-    <AdminContainer>
+    <DashboardContainer>
       <section>
         <h2>Store</h2>
         <Link to='/createstore'>Create Store</Link>
@@ -22,8 +22,8 @@ function Admin({ user }) {
         <h2>Finance</h2>
       </section>
       <h2>Test</h2>
-    </AdminContainer>
+    </DashboardContainer>
   );
 }
 
-export default Admin;
+export default Dashboard;

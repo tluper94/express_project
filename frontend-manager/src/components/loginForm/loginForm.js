@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import AuthForm from '../authForm/AuthForm';
-import { Input, FormInputContainer } from '../authForm/AuthForm.styles';
+import Form from '../form/Form';
+import { FormInput, Btn, BtnContainer } from '../form/Form.styles';
 import { CreateAccountBtn } from './loginForm.styles';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,17 +33,8 @@ function LoginForm({ setUser, onCreateAccountClick }) {
   }
   return (
     <>
-      <AuthForm
-        style={{ marginTop: '20px' }}
-        title='Sign In'
-        onSubmit={onSubmit}
-        changeText={
-          <CreateAccountBtn onClick={onCreateAccountClick}>
-            Need An Account?
-          </CreateAccountBtn>
-        }
-      >
-        <Input
+      <Form style={{ marginTop: '20px' }} title='Sign In' onSubmit={onSubmit}>
+        <FormInput
           required
           type='username'
           name='Username'
@@ -51,7 +42,7 @@ function LoginForm({ setUser, onCreateAccountClick }) {
           value={username}
           onChange={onUsernameChange}
         />
-        <Input
+        <FormInput
           required
           type='password'
           name='createPassword'
@@ -59,7 +50,13 @@ function LoginForm({ setUser, onCreateAccountClick }) {
           value={password}
           onChange={onPasswordChange}
         />
-      </AuthForm>
+        <BtnContainer>
+          <Btn>Submit</Btn>
+        </BtnContainer>
+        <CreateAccountBtn onClick={onCreateAccountClick}>
+          Need An Account?
+        </CreateAccountBtn>
+      </Form>
     </>
   );
 }

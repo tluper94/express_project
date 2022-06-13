@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import AuthForm from '../authForm/AuthForm';
-import { Input } from '../authForm/AuthForm.styles';
+import Form from '../form/Form';
+import { FormInput, BtnContainer, Btn } from '../form/Form.styles';
 import { LoginBtn } from './signupForm.styles';
 
 function SignupForm({ setUser, onLoginClick }) {
@@ -50,14 +50,8 @@ function SignupForm({ setUser, onLoginClick }) {
 
   return (
     <>
-      <AuthForm
-        title='Create An Account'
-        onSubmit={onSignupSubmit}
-        changeText={
-          <LoginBtn onClick={onLoginClick}>Have An Account?</LoginBtn>
-        }
-      >
-        <Input
+      <Form title='Create An Account' onSubmit={onSignupSubmit}>
+        <FormInput
           required
           type='text'
           name='name'
@@ -65,7 +59,7 @@ function SignupForm({ setUser, onLoginClick }) {
           value={name}
           onChange={onNameChange}
         />
-        <Input
+        <FormInput
           required
           type='text'
           name='username'
@@ -73,7 +67,7 @@ function SignupForm({ setUser, onLoginClick }) {
           value={username}
           onChange={onUsernameChange}
         />
-        <Input
+        <FormInput
           required
           type='email'
           name='email'
@@ -81,7 +75,7 @@ function SignupForm({ setUser, onLoginClick }) {
           value={email}
           onChange={onEmailChange}
         />
-        <Input
+        <FormInput
           required
           type='password'
           name='password'
@@ -89,7 +83,11 @@ function SignupForm({ setUser, onLoginClick }) {
           value={password}
           onChange={onPasswordChange}
         />
-      </AuthForm>
+        <BtnContainer>
+          <Btn>Submit</Btn>
+        </BtnContainer>
+        <LoginBtn onClick={onLoginClick}>Have An Account?</LoginBtn>
+      </Form>
     </>
   );
 }
