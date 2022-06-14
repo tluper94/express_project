@@ -9,21 +9,7 @@ function Dashboard({ user }) {
       navigate('/auth');
     }
   }, [user, navigate]);
-  return (
-    <DashboardContainer>
-      <section>
-        <h2>Store</h2>
-        <Link to='/createstore'>Create Store</Link>
-      </section>
-      <section>
-        <h2>Employees</h2>
-      </section>
-      <section>
-        <h2>Finance</h2>
-      </section>
-      <h2>Test</h2>
-    </DashboardContainer>
-  );
+  return <DashboardContainer>Dashboard</DashboardContainer>;
 }
 
 export default Dashboard;

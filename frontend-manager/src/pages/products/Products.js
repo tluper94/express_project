@@ -1,7 +1,7 @@
 import {} from './Products.styles';
 
 function Products() {
-  return <div></div>;
+  return <div>Products</div>;
 }
 
 export default Products;

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   SidebarContainer,
   SidebarItemContainer,
@@ -10,32 +10,46 @@ function Sidebar({ user }) {
   return user ? (
     <SidebarContainer>
       <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Dashboard</SidebarTitle>
+        <Link to='/'>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Dashboard</SidebarTitle>
+        </Link>
       </SidebarItemContainer>
       <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Stores</SidebarTitle>
+        <Link to='/stores'>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Stores</SidebarTitle>
+        </Link>
       </SidebarItemContainer>
       <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Products</SidebarTitle>
+        <Link to='/products'>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Products</SidebarTitle>
+        </Link>
       </SidebarItemContainer>
       <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Categories</SidebarTitle>
+        <Link to='/categories'>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Categories</SidebarTitle>
+        </Link>
       </SidebarItemContainer>
       <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Employees</SidebarTitle>
+        <Link to='/employees'>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Employees</SidebarTitle>
+        </Link>
       </SidebarItemContainer>
       <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Financial</SidebarTitle>
+        <Link to='/finance'>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Finance</SidebarTitle>
+        </Link>
       </SidebarItemContainer>
       <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Settings</SidebarTitle>
+        <Link to='/settings'>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Settings</SidebarTitle>
+        </Link>
       </SidebarItemContainer>
     </SidebarContainer>
   ) : (

@@ -1,7 +1,7 @@
 import {} from './Categories.styles';
 
 function Categories() {
-  return <div></div>;
+  return <div>Categories</div>;
 }
 
 export default Categories;

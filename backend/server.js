@@ -10,6 +10,7 @@ const session = require('express-session');
 
 const signup = require('./controllers/signup.controller');
 const login = require('./controllers/login.contoller');
+const findUser = require('./controllers/findUser.controller');
 const User = require('./models/users.model');
 
 const port = process.env.PORT || 8000;
@@ -36,6 +37,7 @@ passport.deserializeUser(User.deserializeUser());
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/static/index.html');
 });
+app.get('/finduser', auth.authenticate(), findUser);
 
 app.post('/signup', signup);
 app.post('/login', passport.authenticate('local'), login);

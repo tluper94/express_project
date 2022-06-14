@@ -40,7 +40,8 @@ function SignupForm({ setUser, onLoginClick }) {
         password,
       });
       console.log(res);
-      setUser(res.data);
+      window.localStorage.setItem('token', res.data.token);
+      setUser(res.data.token);
       navigate('/');
     } catch (err) {
       console.log(err);

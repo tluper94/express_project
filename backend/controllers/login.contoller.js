@@ -17,7 +17,7 @@ const login = async (req, res) => {
         id: user.id,
         expire: Date.now + 1000 * 60 * 60 * 24 * 7,
       };
-      const token = JWT.sign(JSON.stringify(payload), process.env.JWTSECRET);
+      const token = JWT.sign(payload, process.env.JWTSECRET);
 
       res.json({
         token: token,

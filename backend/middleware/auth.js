@@ -10,6 +10,8 @@ const params = {
 
 module.exports = function () {
   const strategy = new Strategy(params, (payload, done) => {
+    console.log('Auth');
+    console.log(payload);
     const user = User.findById(payload.id, (err, user) => {
       if (err) {
         return done(new Error('User Not Found'), null);

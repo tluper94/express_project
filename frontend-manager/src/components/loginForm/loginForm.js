@@ -25,7 +25,8 @@ function LoginForm({ setUser, onCreateAccountClick }) {
         username: username,
         password: password,
       });
-      setUser(res.data);
+      window.localStorage.setItem('token', res.data.token);
+      setUser(res.data.token);
       navigate('/');
     } catch (err) {
       alert('Invalid Creditials');

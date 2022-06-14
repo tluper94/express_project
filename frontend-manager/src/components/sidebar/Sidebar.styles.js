@@ -13,6 +13,7 @@ export const SidebarContainer = styled.div`
 
 export const SidebarItemContainer = styled.div`
   display: flex;
+  margin-left: 1rem;
   flex-direction: row;
 `;
 

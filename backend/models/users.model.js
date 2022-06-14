@@ -20,6 +20,9 @@ const UsersSchema = mongoose.Schema({
   password: {
     type: String,
   },
+  stores: {
+    type: Array,
+  },
 });
 
 UsersSchema.plugin(passportLocalMongoose);
