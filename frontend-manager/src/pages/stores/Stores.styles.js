@@ -11,13 +11,14 @@ export const StoresContainer = styled.div`
   margin-top: 50px;
   @media (max-width: 768px) {
     width: 100%;
+    padding: 0;
   }
 `;
 
 export const Label = styled.h3`
   color: ${(props) => props.color || '#698ea7'};
   font-size: ${(props) => props.size || '20px'};
-  margin-right: ${(props) => props.marginR || '15px'};
+  margin: ${(props) => props.margin || '0px'};
 `;
 
 export const AddStoreSection = styled.section`
@@ -26,4 +27,26 @@ export const AddStoreSection = styled.section`
   align-items: center;
   flex-direction: row;
   width: 100%;
+`;
+
+export const FirstTimeStoreConatiner = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed grey;
+`;
+
+export const StepOneConatiner = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 2px dashed grey;
+`;
+
+export const StoreText = styled.p`
+  margin: 0;
+  margin-top: ${(props) => props.marginTop};
+  color: ${(props) => props.color || 'grey'};
 `;

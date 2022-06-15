@@ -1,6 +1,5 @@
 .App {
   margin: 0;
-  height: 100%;
 }
 
 .content {
@@ -24,4 +23,11 @@
 
 a{
   text-decoration: none;
+}
+
+@media (max-width: 800px) {
+  .content {
+    width: 100vw;
+    margin-left: 0;
+  }
 }

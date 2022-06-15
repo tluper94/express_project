@@ -24,22 +24,26 @@ export const FormHeader = styled.h2`
 export const FormSection = styled.section`
   display: flex;
   margin-top: 1.25rem;
-  flex-direction: column;
+  flex-direction: ${(props) => props.direction || 'column'};
+  align-items: ${(props) => props.itemAlign};
+  justify-content: ${(props) => props.justify};
 `;
 
 export const FormInput = styled.input`
   height: 36px;
+  width: ${(props) => props.width};
   border: 1px solid rgb(205 205 205);
   border-radius: 5px;
+  font-size: 18px;
   &:focus {
     outline: 2px solid #458fff;
   }
 `;
 
 export const FormLabel = styled.label`
-  width: 100%;
-  margin-right: auto;
-  margin-bottom: 5px;
+  color: ${(props) => props.color};
+  width: ${(props) => props.width || '100%'};
+  margin: ${(props) => props.margin};
 `;
 
 export const BtnContainer = styled.div`

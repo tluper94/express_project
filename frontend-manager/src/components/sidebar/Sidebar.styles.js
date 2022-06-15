@@ -9,6 +9,13 @@ export const SidebarContainer = styled.div`
   top: 0;
   overflow: auto;
   background-color: #393d4f;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    height: auto;
+    position: relative;
+    flex-direction: row;
+  }
 `;
 
 export const SidebarItemContainer = styled.div`
@@ -20,5 +27,6 @@ export const SidebarItemContainer = styled.div`
 export const SidebarLogo = styled.div``;
 
 export const SidebarTitle = styled.h3`
+  font-size: 18px;
   color: white;
 `;
