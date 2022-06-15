@@ -19,7 +19,6 @@ import {
 function Stores({ user }) {
   const [stores, setStores] = useState([]);
   const [createStore, setCreateStore] = useState(false);
-  const [step, setStep] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -37,18 +36,11 @@ function Stores({ user }) {
     getUser();
   }, [user]);
 
-  console.log(stores);
-
   function diplayStoreSection() {
     if (stores.length === 0 && !createStore) {
       return firstTimeStore();
     } else if (createStore) {
-      switch (step) {
-        case step === 1:
-          return stepOne();
-        default:
-          return stepOne();
-      }
+      return displayCreateForm();
     }
   }
 
@@ -77,7 +69,7 @@ function Stores({ user }) {
     );
   }
 
-  function stepOne() {
+  function displayCreateForm() {
     return (
       <StepOneConatiner>
         <Label>General Info</Label>
@@ -101,6 +93,12 @@ function Stores({ user }) {
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
+            City
+          </FormLabel>
+          <FormInput />
+        </FormSection>
+        <FormSection direction='row'>
+          <FormLabel width='100px' margin='0 10vw 0 0'>
             State
           </FormLabel>
           <FormInput />
@@ -116,7 +114,7 @@ function Stores({ user }) {
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Phone
           </FormLabel>
-          <FormInput />
+          <FormInput type='tel' />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
@@ -162,23 +160,21 @@ function Stores({ user }) {
           <FormInput />
         </FormSection>
         <Button
-          onClick={createStoreClickHandler}
+          // onClick={}
           width='10rem'
-          margin='50px 10vw 0 auto'
+          margin='50px 25vw 0 auto'
           color='#278cb1'
           borderRadius='5px'
           height='35px'
         >
-          Proceed To Step 2
+          Save Store
         </Button>
       </StepOneConatiner>
     );
   }
 
   function createStoreClickHandler() {
-    console.log('click');
     setCreateStore(true);
-    setStep(1);
   }
 
   return (
