@@ -12,19 +12,19 @@ const StoresSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  country: {
-    type: String,
-    required: true,
-  },
   state: {
     type: String,
     required: true,
   },
-  zipcode: {
+  zipCode: {
     type: String,
     required: true,
   },
   phone: {
+    type: String,
+    required: true,
+  },
+  fax: {
     type: String,
   },
   email: {

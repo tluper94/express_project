@@ -17,8 +17,27 @@ import {
 } from '../../components/form/Form.styles';
 
 function Stores({ user }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [stores, setStores] = useState([]);
   const [createStore, setCreateStore] = useState(false);
+  const [storeData, setStoreData] = useState({
+    storeName: '',
+    taxId: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    phone: '',
+    fax: '',
+    email: '',
+    website: '',
+    facebook: '',
+    twitter: '',
+    instagram: '',
+    youtube: '',
+  });
+
+  console.log(stores);
 
   useEffect(() => {
     const getUser = async () => {
@@ -29,12 +48,38 @@ function Stores({ user }) {
           },
         });
         setStores(res.data.stores);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
     };
     getUser();
-  }, [user]);
+  }, [user, createStore]);
+
+  const onChangeHandler = (e) => {
+    setStoreData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        'http://192.168.1.117:8000/create',
+        storeData,
+        {
+          headers: {
+            Authorization: `Bearer ${user}`,
+          },
+        }
+      );
+      setCreateStore(false);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   function diplayStoreSection() {
     if (stores.length === 0 && !createStore) {
@@ -71,96 +116,105 @@ function Stores({ user }) {
 
   function displayCreateForm() {
     return (
-      <StepOneConatiner>
+      <StepOneConatiner onSubmit={onSubmit} method='post'>
         <Label>General Info</Label>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Store Name
           </FormLabel>
-          <FormInput />
+          <FormInput
+            required
+            name='storeName'
+            onChange={onChangeHandler}
+            value={storeData.storeName}
+          />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Tax ID
           </FormLabel>
-          <FormInput />
+          <FormInput required name='taxId' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Full Address
           </FormLabel>
-          <FormInput />
+          <FormInput required name='address' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             City
           </FormLabel>
-          <FormInput />
+          <FormInput required name='city' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             State
           </FormLabel>
-          <FormInput />
+          <FormInput required name='state' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Zip Code
           </FormLabel>
-          <FormInput />
+          <FormInput required name='zipCode' onChange={onChangeHandler} />
         </FormSection>
         <Label margin='30px 0 0 0'>Contact Info</Label>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Phone
           </FormLabel>
-          <FormInput type='tel' />
+          <FormInput
+            type='tel'
+            required
+            name='phone'
+            onChange={onChangeHandler}
+          />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Fax
           </FormLabel>
-          <FormInput />
+          <FormInput name='fax' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Email
           </FormLabel>
-          <FormInput />
+          <FormInput required name='email' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Website
           </FormLabel>
-          <FormInput />
+          <FormInput name='website' onChange={onChangeHandler} />
         </FormSection>
         <Label margin='30px 0 0 0'>Social</Label>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Facebook
           </FormLabel>
-          <FormInput />
+          <FormInput name='facebook' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Twitter
           </FormLabel>
-          <FormInput />
+          <FormInput name='twitter' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Instagram
           </FormLabel>
-          <FormInput />
+          <FormInput name='instagram' onChange={onChangeHandler} />
         </FormSection>
         <FormSection direction='row'>
           <FormLabel width='100px' margin='0 10vw 0 0'>
             Youtube
           </FormLabel>
-          <FormInput />
+          <FormInput name='youtube' onChange={onChangeHandler} />
         </FormSection>
         <Button
-          // onClick={}
           width='10rem'
           margin='50px 25vw 0 auto'
           color='#278cb1'
@@ -194,7 +248,7 @@ function Stores({ user }) {
       <Label margin='5px 0' color='grey' size='1rem'>
         Create, edit and manage your stores
       </Label>
-      {diplayStoreSection()}
+      {isLoading ? <h2>Loading...</h2> : diplayStoreSection()}
     </StoresContainer>
   );
 }

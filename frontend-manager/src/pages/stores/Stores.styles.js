@@ -38,7 +38,7 @@ export const FirstTimeStoreConatiner = styled.section`
   border: 2px dashed grey;
 `;
 
-export const StepOneConatiner = styled.section`
+export const StepOneConatiner = styled.form`
   display: flex;
   flex-direction: column;
   padding: 15px;

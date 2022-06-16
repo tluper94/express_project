@@ -12,6 +12,7 @@ const signup = require('./controllers/signup.controller');
 const login = require('./controllers/login.contoller');
 const findUser = require('./controllers/findUser.controller');
 const User = require('./models/users.model');
+const createStore = require('./controllers/createStore.controller');
 
 const port = process.env.PORT || 8000;
 
@@ -41,6 +42,7 @@ app.get('/finduser', auth.authenticate(), findUser);
 
 app.post('/signup', signup);
 app.post('/login', passport.authenticate('local'), login);
+app.post('/create', auth.authenticate(), createStore);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port} - http://localhost:${port}`);
