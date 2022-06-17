@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 
 const StoresSchema = mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+
   storeName: {
     type: String,
     required: true,
+    unique: true,
   },
   taxId: {
     type: String,

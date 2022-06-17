@@ -13,6 +13,7 @@ const login = require('./controllers/login.contoller');
 const findUser = require('./controllers/findUser.controller');
 const User = require('./models/users.model');
 const createStore = require('./controllers/createStore.controller');
+const getStores = require('./controllers/getStores.controller');
 
 const port = process.env.PORT || 8000;
 
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/static/index.html');
 });
 app.get('/finduser', auth.authenticate(), findUser);
+app.get('/getstores', auth.authenticate(), getStores);
 
 app.post('/signup', signup);
 app.post('/login', passport.authenticate('local'), login);

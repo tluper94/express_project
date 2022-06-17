@@ -15,6 +15,7 @@ import {
   FormLabel,
   FormSection,
 } from '../../components/form/Form.styles';
+import StoresTable from '../../components/storesTable/StoresTable';
 
 function Stores({ user }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,9 +41,9 @@ function Stores({ user }) {
   console.log(stores);
 
   useEffect(() => {
-    const getUser = async () => {
+    const getStores = async () => {
       try {
-        const res = await axios.get('http://192.168.1.117:8000/finduser', {
+        const res = await axios.get('http://192.168.1.117:8000/getstores', {
           headers: {
             Authorization: `Bearer ${user}`,
           },
@@ -53,7 +54,7 @@ function Stores({ user }) {
         console.log(err);
       }
     };
-    getUser();
+    getStores();
   }, [user, createStore]);
 
   const onChangeHandler = (e) => {
@@ -75,10 +76,15 @@ function Stores({ user }) {
         }
       );
       setCreateStore(false);
+      setIsLoading(true);
       console.log(res);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const displayTable = () => {
+    return <StoresTable stores={stores} />;
   };
 
   function diplayStoreSection() {
@@ -86,6 +92,8 @@ function Stores({ user }) {
       return firstTimeStore();
     } else if (createStore) {
       return displayCreateForm();
+    } else {
+      return displayTable();
     }
   }
 
