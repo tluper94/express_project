@@ -1,33 +1,77 @@
-import { Table, TableData, TableHeader, TableRow } from '../table/table';
+import { useState } from 'react';
+import {
+  Table,
+  TableBody,
+  TableData,
+  TableHeader,
+  TableInput,
+  TableRow,
+} from '../table/table';
 
 function StoresTable({ stores }) {
+  const [isChecked, setIsChecked] = useState([]);
+  const [isCheckAll, setIsCheckAll] = useState(false);
   const displayArrayOfTableData = (array) => {
     return array.map((value) => {
       return <TableData>{value.name}</TableData>;
     });
   };
+
+  const checkAllInput = (e) => {
+    setIsCheckAll(!isCheckAll);
+    setIsChecked(stores.map(({ _id }) => _id));
+    if (isCheckAll) {
+      setIsChecked([]);
+    }
+  };
+
+  const onCheckHandler = (e) => {
+    const { checked, id } = e.target;
+    setIsChecked([...isChecked, id]);
+    if (!checked) {
+      setIsChecked(isChecked.filter((item) => item !== id));
+    }
+  };
   return (
     <Table>
-      <tbody>
+      <thead>
         <TableRow height='3rem'>
+          <TableHeader width='6rem'>
+            <TableInput
+              width='1rem'
+              height='1rem'
+              type='checkbox'
+              onChange={checkAllInput}
+            />
+          </TableHeader>
           <TableHeader>Store Name</TableHeader>
           <TableHeader>Employees</TableHeader>
           <TableHeader>Registers</TableHeader>
           <TableHeader>Enabled</TableHeader>
         </TableRow>
-        {stores.map((store, id) => {
-          let backgroundColor;
-          if (id % 2 !== 1) {
-            backgroundColor = '#f1f6fc';
-          } else backgroundColor = 'white';
+      </thead>
+      <TableBody>
+        {stores.map(({ storeName, _id }) => {
           return (
-            <TableRow height={'8rem'} backgroundColor={backgroundColor}>
-              <TableData>{store.storeName}</TableData>
-              {displayArrayOfTableData(store.employees)}
+            <TableRow key={_id} height={'8rem'}>
+              <TableData>
+                <TableInput
+                  id={_id}
+                  type='checkbox'
+                  width='1rem'
+                  height='1rem'
+                  onChange={onCheckHandler}
+                  checked={isChecked.includes(_id)}
+                />
+              </TableData>
+              <TableData>{storeName}</TableData>
+              <TableData></TableData>
+              <TableData></TableData>
+              <TableData></TableData>
             </TableRow>
           );
         })}
-      </tbody>
+      </TableBody>
     </Table>
   );
 }

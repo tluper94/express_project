@@ -15,6 +15,14 @@ export const StoresContainer = styled.div`
   }
 `;
 
+export const LoadingConatiner = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Label = styled.h3`
   color: ${(props) => props.color || '#698ea7'};
   font-size: ${(props) => props.size || '20px'};

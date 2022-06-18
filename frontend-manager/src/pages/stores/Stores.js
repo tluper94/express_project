@@ -6,6 +6,7 @@ import {
   AddStoreSection,
   FirstTimeStoreConatiner,
   Label,
+  LoadingConatiner,
   StepOneConatiner,
   StoresContainer,
   StoreText,
@@ -16,6 +17,7 @@ import {
   FormSection,
 } from '../../components/form/Form.styles';
 import StoresTable from '../../components/storesTable/StoresTable';
+import Loading from '../../components/loading/Loading';
 
 function Stores({ user }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -256,7 +258,13 @@ function Stores({ user }) {
       <Label margin='5px 0' color='grey' size='1rem'>
         Create, edit and manage your stores
       </Label>
-      {isLoading ? <h2>Loading...</h2> : diplayStoreSection()}
+      {isLoading ? (
+        <LoadingConatiner>
+          <Loading />
+        </LoadingConatiner>
+      ) : (
+        diplayStoreSection()
+      )}
     </StoresContainer>
   );
 }
