@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CircleButton from '../circleButton/CircleButton';
 import {
   Table,
   TableBody,
@@ -7,6 +8,10 @@ import {
   TableInput,
   TableRow,
 } from '../table/table';
+import { BiEditAlt } from 'react-icons/bi';
+import { EditLinksContainer } from './StoresTable.styles';
+import { IoTrashOutline } from 'react-icons/io5';
+import { FaCashRegister } from 'react-icons/fa';
 
 function StoresTable({ stores }) {
   const [isChecked, setIsChecked] = useState([]);
@@ -48,6 +53,7 @@ function StoresTable({ stores }) {
           <TableHeader>Employees</TableHeader>
           <TableHeader>Registers</TableHeader>
           <TableHeader>Enabled</TableHeader>
+          <TableHeader></TableHeader>
         </TableRow>
       </thead>
       <TableBody>
@@ -68,6 +74,19 @@ function StoresTable({ stores }) {
               <TableData></TableData>
               <TableData></TableData>
               <TableData></TableData>
+              <TableData>
+                <EditLinksContainer>
+                  <CircleButton>
+                    <BiEditAlt size='20px' color='#0079b0' />
+                  </CircleButton>
+                  <CircleButton>
+                    <IoTrashOutline size='20px' color='#db2b11' />
+                  </CircleButton>
+                  <CircleButton label='Registers'>
+                    <FaCashRegister size='20px' color='#0079b0' />
+                  </CircleButton>
+                </EditLinksContainer>
+              </TableData>
             </TableRow>
           );
         })}

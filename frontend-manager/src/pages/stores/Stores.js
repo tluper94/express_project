@@ -4,6 +4,7 @@ import { ReactComponent as StoreIcon } from '../../icons/store-11331.svg';
 import Button from '../../components/button/Button';
 import {
   AddStoreSection,
+  BackButtonContainer,
   FirstTimeStoreConatiner,
   Label,
   LoadingConatiner,
@@ -18,6 +19,7 @@ import {
 } from '../../components/form/Form.styles';
 import StoresTable from '../../components/storesTable/StoresTable';
 import Loading from '../../components/loading/Loading';
+import { IoIosArrowBack } from 'react-icons/io';
 
 function Stores({ user }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -88,6 +90,8 @@ function Stores({ user }) {
   const displayTable = () => {
     return <StoresTable stores={stores} />;
   };
+
+  const onBackClickHandler = () => setCreateStore(false);
 
   function diplayStoreSection() {
     if (stores.length === 0 && !createStore) {
@@ -243,8 +247,20 @@ function Stores({ user }) {
 
   return (
     <StoresContainer>
+      {createStore && (
+        <BackButtonContainer onClick={onBackClickHandler}>
+          <IoIosArrowBack size='20px' color='#698ea7' />
+          <Label size='15px' margin='0 15px 0 0'>
+            Back To Stores
+          </Label>
+        </BackButtonContainer>
+      )}
       <AddStoreSection>
-        <Label margin='0 15px 0 0'>Stores</Label>
+        {createStore ? (
+          <Label margin='0 15px 0 0'>Edit Store</Label>
+        ) : (
+          <Label margin='0 15px 0 0'>Stores</Label>
+        )}
         <Button
           onClick={createStoreClickHandler}
           width='7rem'

@@ -11,8 +11,16 @@ export const StoresContainer = styled.div`
   margin-top: 50px;
   @media (max-width: 768px) {
     width: 100%;
-    padding: 0;
+    padding: 1em;
   }
+`;
+
+export const BackButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const LoadingConatiner = styled.div`
