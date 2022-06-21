@@ -16,6 +16,10 @@ export const TableInput = styled.input`
 export const TableRow = styled.tr`
   background-color: ${(props) => props.backgroundColor};
   height: ${(props) => props.height};
+
+  :hover #editLinks {
+    opacity: 100%;
+  }
 `;
 export const TableData = styled.td`
   text-align: center;

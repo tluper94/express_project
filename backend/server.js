@@ -14,6 +14,7 @@ const findUser = require('./controllers/findUser.controller');
 const User = require('./models/users.model');
 const createStore = require('./controllers/createStore.controller');
 const getStores = require('./controllers/getStores.controller');
+const deleteStore = require('./controllers/deleteStore.controller');
 
 const port = process.env.PORT || 8000;
 
@@ -45,6 +46,8 @@ app.get('/getstores', auth.authenticate(), getStores);
 app.post('/signup', signup);
 app.post('/login', passport.authenticate('local'), login);
 app.post('/create', auth.authenticate(), createStore);
+
+app.delete('/deleteStore', auth.authenticate(), deleteStore);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port} - http://localhost:${port}`);

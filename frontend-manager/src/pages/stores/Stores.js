@@ -88,7 +88,7 @@ function Stores({ user }) {
   };
 
   const displayTable = () => {
-    return <StoresTable stores={stores} />;
+    return <StoresTable stores={stores} user={user} setStores={setStores} />;
   };
 
   const onBackClickHandler = () => setCreateStore(false);
