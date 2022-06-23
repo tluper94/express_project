@@ -11,7 +11,6 @@ export const StoresContainer = styled.div`
   margin-top: 50px;
   @media (max-width: 768px) {
     width: 100%;
-    padding: 1em;
   }
 `;
 

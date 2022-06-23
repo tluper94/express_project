@@ -43,7 +43,9 @@ export const DropDownLabelContainer = styled.div`
   }
 `;
 
-export const CircleButtonContainer = styled.span`
+export const CircleButtonContainer = styled.button`
+  outline: none;
+  border: none;
   position: relative;
   text-align: center;
   margin-right: 10px;
@@ -51,7 +53,7 @@ export const CircleButtonContainer = styled.span`
   width: ${(props) => props.width || '35px'};
   height: ${(props) => props.height || '35px'};
   border-radius: 50%;
-  background-color: '#ffffff';
+  background-color: #ffffff;
   box-shadow: 0px 2px 7px #7a7a7a;
   cursor: pointer;
 `;

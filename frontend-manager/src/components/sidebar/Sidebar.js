@@ -1,67 +1,72 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   SidebarContainer,
-  SidebarItemContainer,
+  NavItem,
   SidebarLogo,
   SidebarTitle,
+  NavList,
 } from './Sidebar.styles';
 
 function Sidebar({ user }) {
   return user ? (
     <SidebarContainer>
-      <SidebarItemContainer>
-        <Link to='/'>
-          <SidebarLogo></SidebarLogo>
-          <SidebarTitle>Dashboard</SidebarTitle>
-        </Link>
-      </SidebarItemContainer>
-      <SidebarItemContainer>
-        <Link to='/stores'>
-          <SidebarLogo></SidebarLogo>
-          <SidebarTitle>Stores</SidebarTitle>
-        </Link>
-      </SidebarItemContainer>
-      <SidebarItemContainer>
-        <Link to='/products'>
-          <SidebarLogo></SidebarLogo>
-          <SidebarTitle>Products</SidebarTitle>
-        </Link>
-      </SidebarItemContainer>
-      <SidebarItemContainer>
-        <Link to='/categories'>
-          <SidebarLogo></SidebarLogo>
-          <SidebarTitle>Categories</SidebarTitle>
-        </Link>
-      </SidebarItemContainer>
-      <SidebarItemContainer>
-        <Link to='/employees'>
-          <SidebarLogo></SidebarLogo>
-          <SidebarTitle>Employees</SidebarTitle>
-        </Link>
-      </SidebarItemContainer>
-      <SidebarItemContainer>
-        <Link to='/finance'>
-          <SidebarLogo></SidebarLogo>
-          <SidebarTitle>Finance</SidebarTitle>
-        </Link>
-      </SidebarItemContainer>
-      <SidebarItemContainer>
-        <Link to='/settings'>
-          <SidebarLogo></SidebarLogo>
-          <SidebarTitle>Settings</SidebarTitle>
-        </Link>
-      </SidebarItemContainer>
+      <NavList>
+        <NavItem>
+          <Link to='/'>
+            <SidebarLogo></SidebarLogo>
+            Dashboard
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link to='/stores'>
+            <SidebarLogo></SidebarLogo>
+            Stores
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link to='/products'>
+            <SidebarLogo></SidebarLogo>
+            Products
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link to='/categories'>
+            <SidebarLogo></SidebarLogo>
+            Categories
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link to='/employees'>
+            <SidebarLogo></SidebarLogo>
+            Employees
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link to='/finance'>
+            <SidebarLogo></SidebarLogo>
+            Finance
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link to='/settings'>
+            <SidebarLogo></SidebarLogo>
+            Settings
+          </Link>
+        </NavItem>
+      </NavList>
     </SidebarContainer>
   ) : (
     <SidebarContainer>
-      <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Login</SidebarTitle>
-      </SidebarItemContainer>
-      <SidebarItemContainer>
-        <SidebarLogo></SidebarLogo>
-        <SidebarTitle>Register</SidebarTitle>
-      </SidebarItemContainer>
+      <NavList>
+        <NavItem>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Login</SidebarTitle>
+        </NavItem>
+        <NavItem>
+          <SidebarLogo></SidebarLogo>
+          <SidebarTitle>Register</SidebarTitle>
+        </NavItem>
+      </NavList>
     </SidebarContainer>
   );
 }
