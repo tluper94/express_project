@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Sidebar from './components/sidebar/Sidebar';
+import SideNavBar from './components/sideBar/SideBar';
 import Dashboard from './pages/dasboard/Dashboard';
 import Auth from './pages/Auth/Auth';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
@@ -11,6 +11,8 @@ import Categories from './pages/categories/Categories';
 import Settings from './pages/settings/Settings';
 import Employees from './pages/employees/Employees';
 import Finance from './pages/Finance/Finance';
+import './assets/scss/theme/theme.scss';
+import { Container } from 'react-bootstrap';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,8 +24,8 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
-      <Sidebar user={user} />
+    <Container fluid>
+      <SideNavBar user={user} />
       <div className='content'>
         <Routes>
           <Route element={<ProtectedRoute user={user} />}>
@@ -41,7 +43,7 @@ function App() {
           />
         </Routes>
       </div>
-    </div>
+    </Container>
   );
 }
 
