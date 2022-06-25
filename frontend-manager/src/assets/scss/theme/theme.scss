@@ -1,14 +1,9 @@
 @import './variables';
 
-//Flex
-.d-flex {display: flex;}
-.flex-column {flex-direction: column;}
-.flex-row {flex-direction: row;}
-
-//Align
-.justify-center {justify-content: center;}
-.align-items-center {align-items: center;}
-
+body {
+  position: relative;
+  background-color: $pos-body-bg ;
+}
 
 //Color Schemes
 
@@ -19,5 +14,11 @@
   position: fixed;
   width: $navbar-vertical-width;
   height: 100vh !important;
-  background-color: $pos-navbar-vertical-bg-color--dark;
+  color: $navbar-vertical-link-color;
+}
+
+.navbar-vertical-content {
+  position: fixed;
+  width: navbar-vertical-width;
+  height: calc(100vh - 4.25rem);
 }

@@ -4,7 +4,7 @@ export const StoresContainer = styled.div`
   display: flex;
   width: 85%;
   border-radius: 10px;
-  box-shadow: 1px 1px 16px 5px rgb(235 235 235);
+  /* box-shadow: 1px 1px 16px 5px rgb(235 235 235); */
   flex-direction: column;
   padding: 1.25em;
   background-color: rgb(255, 255, 255);
