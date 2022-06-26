@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-@import "~bootstrap/scss/bootstrap";
-
-
-// Color Scheme Dark
-$pos-body-bg: #0b1727;
-$pos-bg-navbar-glass--dark: rgba(11,23,39,0.96);
-$pos-navbar-vertical-bg-color--dark: $pos-bg-navbar-glass--dark;
-
-
-//NavBar Verticle
-$navbar-vertical-width: 12.625rem !default;
-$navbar-vertical-link-color: #9da9bb;
-
-=======
 /* prettier-ignore */
 @use 'sass:math';
 @import 'colors';
@@ -797,4 +782,3 @@ $simplebar-bg: $scrollbar-bg !default;
 //-----------------------------------------------*/
 $timeline-vertical-breakpoint: lg !default;
 $timeline-zigzag-breakpoint: lg !default;
->>>>>>> 13e5206522a98607b6c33d02bda3ef3bf599c20d

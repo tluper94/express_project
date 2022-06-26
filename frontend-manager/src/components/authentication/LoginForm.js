@@ -5,21 +5,34 @@ import { toast } from 'react-toastify';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
+import axios from 'axios';
 
 const LoginForm = ({ hasLabel, layout }) => {
   // State
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
     remember: false
   });
 
+  console.log(formData);
+
   // Handler
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    toast.success(`Logged in as ${formData.email}`, {
-      theme: 'colored'
-    });
+    try {
+      const res = await axios.post('http://localhost:8000/login', formData);
+      toast.success(`Logged in as ${formData.username}`, {
+        theme: 'colored'
+      });
+
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+      toast.error(`Error logging in`, {
+        theme: 'colored'
+      });
+    }
   };
 
   const handleFieldChange = e => {
@@ -35,10 +48,10 @@ const LoginForm = ({ hasLabel, layout }) => {
         {hasLabel && <Form.Label>Email address</Form.Label>}
         <Form.Control
           placeholder={!hasLabel ? 'Email address' : ''}
-          value={formData.email}
-          name="email"
+          value={formData.username}
+          name="username"
           onChange={handleFieldChange}
-          type="email"
+          type="username"
         />
       </Form.Group>
 
@@ -86,7 +99,7 @@ const LoginForm = ({ hasLabel, layout }) => {
           type="submit"
           color="primary"
           className="mt-3 w-100"
-          disabled={!formData.email || !formData.password}
+          disabled={!formData.username || !formData.password}
         >
           Log in
         </Button>
