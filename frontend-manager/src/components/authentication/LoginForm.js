@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
-import axios from 'axios';
+import { login, reset } from '../../features/auth/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const LoginForm = ({ hasLabel, layout }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    state => state.auth
+  );
+
+  console.log(user);
+
   // State
   const [formData, setFormData] = useState({
     username: '',
@@ -15,18 +25,31 @@ const LoginForm = ({ hasLabel, layout }) => {
     remember: false
   });
 
+  useEffect(() => {
+    console.log('ERR', isError);
+    if (isError) {
+      console.log(message);
+      toast.error(message);
+    }
+
+    if (user) navigate('/');
+
+    if (isSuccess) {
+      toast.success(`Signed In As ${formData.username}`);
+      console.log(isSuccess);
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, dispatch, user, message, navigate]);
+
   console.log(formData);
 
   // Handler
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8000/login', formData);
-      toast.success(`Logged in as ${formData.username}`, {
-        theme: 'colored'
-      });
-
-      console.log(res);
+      dispatch(login(formData));
     } catch (err) {
       console.log(err);
       toast.error(`Error logging in`, {
