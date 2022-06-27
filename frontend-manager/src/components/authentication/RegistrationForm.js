@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
+import { useSelector, useDispatch } from 'react-redux';
+import { register, reset } from 'features/auth/authSlice';
 
 const RegistrationForm = ({ hasLabel }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    state => state.auth
+  );
   // State
   const [formData, setFormData] = useState({
     name: '',
@@ -16,12 +24,45 @@ const RegistrationForm = ({ hasLabel }) => {
     isAccepted: false
   });
 
+  useEffect(() => {
+    console.log(user, isLoading, isError, isSuccess, message);
+    if (isError) {
+      toast.error(message, {
+        theme: 'colored'
+      });
+      dispatch(reset());
+    }
+
+    if (user) {
+      navigate('/');
+      dispatch(reset());
+    }
+
+    if (isSuccess) {
+      toast.success(`Successfully registered as ${formData.name}`, {
+        theme: 'colored'
+      });
+      console.log(isSuccess);
+      navigate('/');
+      dispatch(reset());
+    }
+  }, [user, isLoading, isError, isSuccess, message, dispatch, navigate]);
+
   // Handler
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    toast.success(`Successfully registered as ${formData.name}`, {
-      theme: 'colored'
-    });
+
+    const { name, email, password, confirmPassword, isAccepted } = formData;
+
+    if (isAccepted && password === confirmPassword) {
+      const userData = {
+        name,
+        email,
+        password
+      };
+
+      dispatch(register(userData));
+    }
   };
 
   const handleFieldChange = e => {

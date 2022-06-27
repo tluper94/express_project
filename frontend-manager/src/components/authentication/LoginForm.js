@@ -16,46 +16,37 @@ const LoginForm = ({ hasLabel, layout }) => {
     state => state.auth
   );
 
-  console.log(user);
-
   // State
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
     remember: false
   });
 
   useEffect(() => {
-    console.log('ERR', isError);
+    console.log(user, isLoading, isError, isSuccess, message);
     if (isError) {
-      console.log(message);
-      toast.error(message);
+      toast.error(message, {
+        theme: 'colored'
+      });
     }
 
-    if (user) navigate('/');
-
-    if (isSuccess) {
-      toast.success(`Signed In As ${formData.username}`);
-      console.log(isSuccess);
+    if (user) {
       navigate('/');
     }
 
+    if (isSuccess) {
+      toast.success(`Signed In As ${formData.email}`);
+      console.log(isSuccess);
+      navigate('/');
+    }
     dispatch(reset());
   }, [isError, isSuccess, dispatch, user, message, navigate]);
-
-  console.log(formData);
 
   // Handler
   const handleSubmit = async e => {
     e.preventDefault();
-    try {
-      dispatch(login(formData));
-    } catch (err) {
-      console.log(err);
-      toast.error(`Error logging in`, {
-        theme: 'colored'
-      });
-    }
+    dispatch(login(formData));
   };
 
   const handleFieldChange = e => {
@@ -71,10 +62,10 @@ const LoginForm = ({ hasLabel, layout }) => {
         {hasLabel && <Form.Label>Email address</Form.Label>}
         <Form.Control
           placeholder={!hasLabel ? 'Email address' : ''}
-          value={formData.username}
-          name="username"
+          value={formData.email}
+          name="email"
           onChange={handleFieldChange}
-          type="username"
+          type="email"
         />
       </Form.Group>
 
@@ -122,7 +113,7 @@ const LoginForm = ({ hasLabel, layout }) => {
           type="submit"
           color="primary"
           className="mt-3 w-100"
-          disabled={!formData.username || !formData.password}
+          disabled={!formData.email || !formData.password}
         >
           Log in
         </Button>

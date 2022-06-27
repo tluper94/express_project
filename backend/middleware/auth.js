@@ -1,35 +1,32 @@
-const passport = require('passport');
-const passportJWT = require('passport-jwt');
 const User = require('../models/users.model');
-const ExtractJWT = passportJWT.ExtractJwt;
-const Strategy = passportJWT.Strategy;
-const params = {
-  secretOrKey: process.env.JWTSECRET,
-  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken('jwt'),
-};
+const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 
-module.exports = function () {
-  const strategy = new Strategy(params, (payload, done) => {
-    console.log('Auth');
-    console.log(payload);
-    User.findById(payload.id, (err, user) => {
-      if (err) {
-        return done(new Error('User Not Found'), null);
-      } else if (payload.expire <= Date.now()) {
-        return done(new Error('Token Expired'), null);
-      } else {
-        return done(null, user);
-      }
-    });
-  });
+const protect = asyncHandler(async (req, res, next) => {
+  let token;
+  const authHeader = req.headers.authorization;
 
-  passport.use(strategy);
-  return {
-    initialize: function () {
-      return passport.initialize();
-    },
-    authenticate: function () {
-      return passport.authenticate('jwt', { session: false });
-    },
-  };
+  if (authHeader && authHeader.startsWith('Bearer')) {
+    try {
+      token = authHeader.split(' ')[1];
+
+      const decoded = jwt.verify(token, process.env.JWTSECRET);
+
+      req.user = await User.findById(decoded.id).select('-password');
+
+      next();
+    } catch (error) {
+      console.log(error);
+      res.status(401);
+      throw new Error('Not authorized');
+    }
+  }
+  if (!token) {
+    res.status(401);
+    throw new Error('Not authorized, no token');
+  }
+});
+
+module.exports = {
+  protect,
 };
