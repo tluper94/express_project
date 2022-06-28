@@ -1,10 +1,6 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  isRejectedWithValue
-} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
-import { errorMessage } from 'features/helperFuntions';
+// import { errorMessage } from 'features/helperFuntions';
 
 const user = JSON.parse(localStorage.getItem('user'));
 

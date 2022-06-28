@@ -10,7 +10,7 @@ export const appRoutes = {
     {
       name: 'Stores',
       icon: 'comments',
-      to: '/app/chat',
+      to: '/stores',
       active: true
     },
     {

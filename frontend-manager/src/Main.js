@@ -5,7 +5,7 @@ import { settings } from './config';
 import { getColor, getItemFromStore } from 'helpers/utils';
 import { configReducer } from './reducers/configReducer';
 import useToggleStyle from './hooks/useToggleStyle';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 const Main = props => {
   const configState = {

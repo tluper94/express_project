@@ -23,8 +23,6 @@ const NavbarVertical = () => {
     }
   } = useContext(AppContext);
 
-  console.log(routes);
-
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
 
   useEffect(() => {

@@ -18,7 +18,9 @@ const ChatContentBody = ({ thread }) => {
   useEffect(() => {
     if (scrollToBottom) {
       setTimeout(() => {
-        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 500);
       setScrollToBottom(false);
     }

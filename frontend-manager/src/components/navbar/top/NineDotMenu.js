@@ -12,9 +12,15 @@ const NineDotMenu = () => {
   const [show, setShow] = useState(null);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      window.innerWidth < 1200 && setShow(false);
-    });
+    let isMounted = true;
+    if (isMounted) {
+      window.addEventListener('scroll', () => {
+        window.innerWidth < 1200 && setShow(false);
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (

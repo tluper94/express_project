@@ -36,7 +36,9 @@ const LoginForm = ({ hasLabel, layout }) => {
     }
 
     if (isSuccess) {
-      toast.success(`Signed In As ${formData.email}`);
+      toast.success(`Signed in as ${formData.email}`, {
+        theme: 'colored'
+      });
       console.log(isSuccess);
       navigate('/');
     }

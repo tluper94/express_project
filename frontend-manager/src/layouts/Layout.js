@@ -73,17 +73,18 @@ import VerticalAlign from 'components/utilities/VerticalAlign';
 import Flex from 'components/utilities/Flex';
 import Grid from 'components/utilities/Grid';
 import WizardForms from 'components/doc-components/WizardForms';
-import GettingStarted from 'components/documentation/GettingStarted';
-import Configuration from 'components/documentation/Configuration';
-import DarkMode from 'components/documentation/DarkMode';
-import Plugins from 'components/documentation/Plugins';
-import Styling from 'components/documentation/Styling';
-import DesignFile from 'components/documentation/DesignFile';
+// import GettingStarted from 'components/documentation/GettingStarted';
+// import Configuration from 'components/documentation/Configuration';
+// import DarkMode from 'components/documentation/DarkMode';
+// import Plugins from 'components/documentation/Plugins';
+// import Styling from 'components/documentation/Styling';
+// import ModalAuth from 'components/authentication/modal/ModalAuth';
+// import DesignFile from 'components/documentation/DesignFile';
+// import Changelog from 'components/documentation/change-log/ChangeLog';
 import Starter from 'components/pages/Starter';
 import AnimatedIcons from 'components/doc-components/AnimatedIcons';
 import DatePicker from 'components/doc-components/DatePicker';
 import FontAwesome from 'components/doc-components/FontAwesome';
-import Changelog from 'components/documentation/change-log/ChangeLog';
 import Analytics from 'components/dashboards/analytics';
 import Crm from 'components/dashboards/crm';
 import Saas from 'components/dashboards/saas';
@@ -97,7 +98,6 @@ import Feed from 'components/app/social/feed/Feed';
 import Placeholder from 'components/doc-components/Placeholder';
 import Lightbox from 'components/doc-components/Lightbox';
 import AdvanceTableExamples from 'components/doc-components/AdvanceTableExamples';
-import ModalAuth from 'components/authentication/modal/ModalAuth';
 import Calendar from 'components/app/calendar/Calendar';
 import FaqAlt from 'components/pages/faq/faq-alt/FaqAlt';
 import FaqBasic from 'components/pages/faq/faq-basic/FaqBasic';
@@ -182,11 +182,12 @@ import SplitLockScreen from 'components/authentication/split/LockScreen';
 import Wizard from 'components/wizard/Wizard';
 import Dashboard from 'components/dashboards/default';
 import AppContext from 'context/Context';
-import Faq from 'components/documentation/Faq';
+// import Faq from 'components/documentation/Faq';
 
 import ProtectedRoutes from 'components/authentication/ProtectedRoutes';
 
 import { useSelector } from 'react-redux';
+import Stores from 'components/pages/stores/Stores';
 
 const Layout = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
@@ -372,6 +373,7 @@ const Layout = () => {
             <Route path="email/compose" element={<Compose />} />
 
             {/*Pages*/}
+            <Route path="/stores" element={<Stores />} />
             <Route path="pages/starter" element={<Starter />} />
             <Route path="user/profile" element={<Profile />} />
             <Route path="user/settings" element={<Settings />} />

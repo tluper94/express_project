@@ -6,13 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const IconButton = ({
   icon,
+  buttonClassNames,
   iconAlign = 'left',
   iconClassName,
   transform,
   children,
   ...rest
 }) => (
-  <Button {...rest}>
+  <Button className={buttonClassNames} {...rest}>
     {iconAlign === 'right' && children}
     <FontAwesomeIcon
       icon={icon}

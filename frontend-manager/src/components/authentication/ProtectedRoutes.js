@@ -1,4 +1,6 @@
+import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import PropType from 'prop-types';
 
 const ProtectedRoutes = ({
   user,
@@ -10,6 +12,12 @@ const ProtectedRoutes = ({
   }
 
   return children ? children : <Outlet />;
+};
+
+ProtectedRoutes.propTypes = {
+  user: PropType.object,
+  redirectPath: PropType.string,
+  children: PropType.node
 };
 
 export default ProtectedRoutes;
