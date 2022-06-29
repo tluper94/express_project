@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
-import { login, reset } from '../../features/auth/authSlice';
+import { login, resetState } from '../../features/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const LoginForm = ({ hasLabel, layout }) => {
@@ -42,7 +42,7 @@ const LoginForm = ({ hasLabel, layout }) => {
       console.log(isSuccess);
       navigate('/');
     }
-    dispatch(reset());
+    dispatch(resetState());
   }, [isError, isSuccess, dispatch, user, message, navigate]);
 
   // Handler

@@ -4,6 +4,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import AppContext from 'context/Context';
+import CreateStoreLayout from './CreateStoreLayout';
 
 const CreateStoreModal = ({ setIsOpenCreateModal, isOpenCreateModal }) => {
   const {
@@ -34,7 +35,12 @@ const CreateStoreModal = ({ setIsOpenCreateModal, isOpenCreateModal }) => {
       onHide={handleClose}
       contentClassName="border"
     >
-      <Form onSubmit={handleSubmit}>
+      <CreateStoreLayout
+        validation
+        setIsModalOpen={setIsOpenCreateModal}
+        isModalOpen={isOpenCreateModal}
+      />
+      {/* <Form onSubmit={handleSubmit}>
         <Modal.Header
           closeButton
           closeVariant={isDark ? 'white' : undefined}
@@ -111,7 +117,7 @@ const CreateStoreModal = ({ setIsOpenCreateModal, isOpenCreateModal }) => {
             Save
           </Button>
         </Modal.Footer>
-      </Form>
+      </Form> */}
     </Modal>
   );
 };

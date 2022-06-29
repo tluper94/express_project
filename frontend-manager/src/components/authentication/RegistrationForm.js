@@ -6,7 +6,7 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import Divider from 'components/common/Divider';
 import SocialAuthButtons from './SocialAuthButtons';
 import { useSelector, useDispatch } from 'react-redux';
-import { register, reset } from 'features/auth/authSlice';
+import { register, resetState } from 'features/auth/authSlice';
 
 const RegistrationForm = ({ hasLabel }) => {
   const dispatch = useDispatch();
@@ -30,12 +30,12 @@ const RegistrationForm = ({ hasLabel }) => {
       toast.error(message, {
         theme: 'colored'
       });
-      dispatch(reset());
+      dispatch(resetState());
     }
 
     if (user) {
       navigate('/');
-      dispatch(reset());
+      dispatch(resetState());
     }
 
     if (isSuccess) {
@@ -44,7 +44,7 @@ const RegistrationForm = ({ hasLabel }) => {
       });
       console.log(isSuccess);
       navigate('/');
-      dispatch(reset());
+      dispatch(resetState());
     }
   }, [user, isLoading, isError, isSuccess, message, dispatch, navigate]);
 

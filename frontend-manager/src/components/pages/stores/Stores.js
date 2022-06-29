@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Card,
@@ -14,9 +14,24 @@ import IconButton from 'components/common/IconButton';
 import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWrapper';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import CreateStoreModal from './CreateStoreModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStores, resetState } from 'features/stores/storesSlice';
 
 const Stores = () => {
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
+  const dispatch = useDispatch();
+
+  const { stores, isSuccess, isLoading, isError, message } = useSelector(
+    state => state.stores
+  );
+
+  console.log(stores, isLoading, isSuccess, isError, message);
+
+  useEffect(() => {
+    dispatch(getStores());
+
+    dispatch(resetState());
+  }, [dispatch]);
 
   function BulAction({ selectedRowIds }) {
     return (
@@ -138,10 +153,12 @@ const Stores = () => {
               }}
             />
           </AdvanceTableWrapper>
-          <CreateStoreModal
-            setIsOpenCreateModal={setIsOpenCreateModal}
-            isOpenCreateModal={isOpenCreateModal}
-          />
+          {isOpenCreateModal && (
+            <CreateStoreModal
+              setIsOpenCreateModal={setIsOpenCreateModal}
+              isOpenCreateModal={isOpenCreateModal}
+            />
+          )}
         </Card.Body>
       </Card>
     </>

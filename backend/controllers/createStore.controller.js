@@ -6,6 +6,7 @@ const createStore = async (req, res) => {
   const { storeName, taxId, address, city, state, zipCode, phone } = req.body;
 
   if (storeName && taxId && address && city && state && zipCode && phone) {
+    console.log(req.body);
     try {
       const user = await User.findById(req.user._id);
       const data = { ...req.body, userId: user._id };
@@ -23,12 +24,19 @@ const createStore = async (req, res) => {
 
       res.json({
         storeId: store,
-        message: 'Store created successfully',
+        message: 'Store created successfully'
       });
     } catch (err) {
-      console.log(err);
-      res.status(400).json({ message: 'Error creating store' });
+      console.log(err.code);
+      let message;
+
+      err.code === 11000
+        ? (message = 'Store already exist')
+        : (message = 'Error creating store');
+      res.status(400).json({ message: message });
     }
+  } else {
+    res.status(400).json({ message: 'Please fill out required fields' });
   }
 };
 
