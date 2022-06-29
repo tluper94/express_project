@@ -22,13 +22,13 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/static/index.html');
 });
 // app.get('/finduser', protect, findUser);
-app.get('/getstores', protect, getStores);
+app.get('/stores', protect, getStores);
 
 app.post('/register', registerUser);
 app.post('/login', loginUser);
-app.post('/create', protect, createStore);
+app.post('/stores', protect, createStore);
 
-app.delete('/deleteStore', protect, deleteStore);
+app.delete('/stores', protect, deleteStore);
 
 app.use(errorHandler);
 

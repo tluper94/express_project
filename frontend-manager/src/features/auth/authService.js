@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/';
+const API_URL = 'http://192.168.1.117:8000/';
 
 const login = async userData => {
   const res = await axios.post(API_URL + 'login', userData);

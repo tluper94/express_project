@@ -6,6 +6,8 @@ const protect = asyncHandler(async (req, res, next) => {
   let token;
   const authHeader = req.headers.authorization;
 
+  console.log(req.headers);
+
   if (authHeader && authHeader.startsWith('Bearer')) {
     try {
       token = authHeader.split(' ')[1];
@@ -28,5 +30,5 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 module.exports = {
-  protect,
+  protect
 };

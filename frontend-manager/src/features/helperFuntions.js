@@ -7,10 +7,10 @@ export const errorMessage = error => {
   );
 };
 
-export const axiosConfig = token => {
+export const axiosConfig = () => {
   return {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
     }
   };
 };

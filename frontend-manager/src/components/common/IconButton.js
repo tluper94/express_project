@@ -11,12 +11,14 @@ const IconButton = ({
   iconClassName,
   transform,
   children,
+  size,
   ...rest
 }) => (
   <Button className={buttonClassNames} {...rest}>
     {iconAlign === 'right' && children}
     <FontAwesomeIcon
       icon={icon}
+      size={size}
       className={classNames(iconClassName, {
         'me-1': children && iconAlign === 'left',
         'ms-1': children && iconAlign === 'right'
