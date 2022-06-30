@@ -145,7 +145,7 @@ const Stores = () => {
             data={stores ? stores : []}
             sortable
             pagination
-            perPage={5}
+            perPage={10}
             selection
             selectionColumnWidth={30}
           >
