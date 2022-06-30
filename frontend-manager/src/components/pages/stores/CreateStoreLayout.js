@@ -14,7 +14,6 @@ import WizardModal from '../../wizard/WizardModal';
 import Flex from 'components/common/Flex';
 import { toast } from 'react-toastify';
 import { CgClose } from 'react-icons/cg';
-import ReactIconButton from '../../common/ReactIconButton';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createStore, resetState } from 'features/stores/storesSlice';
