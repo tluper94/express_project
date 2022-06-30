@@ -33,6 +33,8 @@ const Stores = () => {
     dispatch(resetState());
   }, [dispatch]);
 
+  console.log(stores);
+
   function BulAction({ selectedRowIds }) {
     return (
       <Row className="flex-between-center mb-3">
@@ -82,20 +84,25 @@ const Stores = () => {
 
   const columns = [
     {
-      accessor: 'name',
+      accessor: 'storeName',
       Header: 'Name'
     },
     {
-      accessor: 'email',
-      Header: 'Email',
+      accessor: 'employees',
+      Header: 'Employees',
       Cell: rowData => {
-        const { email } = rowData.row.original;
-        return <a href={'mailto:' + email}>{email}</a>;
+        const { employees } = rowData.row.original;
+        console.log(employees);
+        return employees.map(employee => <p>{employee}</p>);
       }
     },
     {
-      accessor: 'age',
-      Header: 'Age',
+      accessor: 'registers',
+      Header: 'Register',
+      Cell: rowData => {
+        const { registers } = rowData.row.original;
+        return registers.map(register => <p>{register}</p>);
+      },
       cellProps: {
         className: 'fw-medium'
       }
@@ -135,7 +142,7 @@ const Stores = () => {
         <Card.Body>
           <AdvanceTableWrapper
             columns={columns}
-            data={data}
+            data={stores ? stores : []}
             sortable
             pagination
             perPage={5}
