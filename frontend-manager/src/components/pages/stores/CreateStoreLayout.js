@@ -16,7 +16,11 @@ import { toast } from 'react-toastify';
 import { CgClose } from 'react-icons/cg';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { createStore, resetState } from 'features/stores/storesSlice';
+import {
+  createStore,
+  resetState,
+  getStores
+} from 'features/stores/storesSlice';
 
 const WizardLayout = ({
   variant,
@@ -73,6 +77,7 @@ const WizardLayout = ({
 
     if (step === 3 && isSuccess) {
       setStep(step + 1);
+      dispatch(getStores());
     }
 
     dispatch(resetState());
